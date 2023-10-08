@@ -1,6 +1,4 @@
--- +goose Up
--- +goose StatementBegin
-CREATE TABLE IF NOT EXISTS public.overdue
+CREATE TABLE IF NOT EXISTS meddata.public.overdue
 (
     subject          text NOT NULL check ( subject != '' ),
     mo               text NOT NULL check ( mo != '' ),
@@ -15,9 +13,3 @@ CREATE TABLE IF NOT EXISTS public.overdue
     ex_date          date NOT NULL,
     ex_days          int NOT NULL check ( ex_days > 0 )
 );
--- +goose StatementEnd
-
--- +goose Down
--- +goose StatementBegin
-DROP TABLE IF EXISTS public.overdue;
--- +goose StatementEnd

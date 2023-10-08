@@ -16,4 +16,7 @@ migrations-up:
 migrations-down:
 	goose -dir sql/migrations postgres $(LOCAL_DB_DSN) down
 
+run-py:
+	python3 bot\main.py
+
 .PHONY: parse-excel migrations-up migrations-down
