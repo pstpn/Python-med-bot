@@ -1,7 +1,9 @@
 import sqlalchemy
 import pandas as pd
 import xlsxwriter
-import asyncpg
+
+
+output_filename = "data/report.xlsx"
 
 
 def save_excel_to_db(
@@ -33,18 +35,19 @@ def save_excel_to_db(
     workbook[1:].to_sql(db_name, engine, if_exists="replace")
 
 
-async def save_report_to_excel(report: list[asyncpg.Record]) -> None:
-    workbook = xlsxwriter.Workbook("data/new_report.xlsx")
-
+def save_report_to_excel(
+        report: list[tuple],
+        title=["Субъект РФ", "Суммарное количество доз", "Среднее просрочено дней"],
+) -> None:
+    workbook = xlsxwriter.Workbook(output_filename)
     worksheet = workbook.add_worksheet()
     bold = workbook.add_format({"bold": True})
-    worksheet.write(0, 0, "Субъект РФ", bold)
-    worksheet.write(0, 1, "Суммарное количество доз", bold)
-    worksheet.write(0, 2, "Среднее просрочено дней", bold)
+
+    for i, col_name in enumerate(title):
+        worksheet.write(0, i, col_name, bold)
 
     for i in range(len(report)):
-        worksheet.write(i + 1, 0, report[i]["Субъект РФ"])
-        worksheet.write(i + 1, 1, report[i]["Суммарное количество доз"])
-        worksheet.write(i + 1, 2, report[i]["Среднее просрочено дней"])
+        for j in range(len(title)):
+            worksheet.write(i + 1, j, report[i][j])
 
     workbook.close()

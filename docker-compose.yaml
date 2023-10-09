@@ -4,14 +4,6 @@ services:
   postgres:
     container_name: postgres_container
     image: postgres
-    command:
-      - postgres
-      - -c
-      - 'tcp_keepalives_idle=600'
-      - -c
-      - 'tcp_keepalives_interval=30'
-      - -c
-      - 'tcp_keepalives_count=10'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
@@ -30,7 +22,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: "<your_url>"
+      DATABASE_URL: "postgresql://postgres:admin@postgres:5432/meddata"
       BOT_TOKEN: "<your_token>"
 
   pgadmin:
