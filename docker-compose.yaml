@@ -23,7 +23,7 @@ services:
       - postgres
     environment:
       DATABASE_URL: "postgresql://postgres:admin@postgres:5432/meddata"
-      BOT_TOKEN: "<your_token>"
+      BOT_TOKEN: ${BOT_TOKEN}
 
   pgadmin:
     container_name: pgadmin_container
