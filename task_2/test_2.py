@@ -1,30 +1,76 @@
-"""
+def isBrokenVersion1(version: int) -> bool:
+    return version > 4
 
-Вы продукт-менеджер и в настоящее время возглавляете команду по разработке нового продукта. К сожалению, последняя версия вашего продукта не прошла проверку качества. Поскольку каждая версия разрабатывается на основе предыдущей версии, все версии после сломанной версии тоже сломаны.
-Предположим, у вас есть n версий [1, 2, ..., n] и вы хотите найти первую сломанную версию, из-за которой все последующие будут сломаны.
-Вам предоставляется bool API isBrokenVersion (версия), который возвращает, является ли версия сломанной. Реализуйте функцию для поиска первой сломанной версии. Вы должны свести к минимуму количество обращений к API.
 
-Пример 1:
-Вход: n = 5, bad = 4
-Выход: 4
-Объяснение:
-вызов isBrokenVersion(3) -> false
-вызов isBrokenVersion(5) -> true
-вызов isBrokenVersion(4) -> true
-4 - первая сломанная версия.
+def isBrokenVersion2(version: int) -> bool:
+    return version > 0
 
-Пример 2:
-Вход: n = 1, bad = 1
-Выход: 1
 
-Ограничения:
-1 <= bad <= n <= 231 - 1
-Необходимо предоставить анализ сложности по времени и памяти в нотации O.
-Реализуйте метод solve и сохраните решение в файле test_2.py
+def isBrokenVersion3(version: int) -> bool:
+    return version > 6
 
-# isBrokenVersion API уже реализован.
-# def isBrokenVersion(version: int) -> bool:
+
+def isBrokenVersion4(version: int) -> bool:
+    return version > 5
+
+
+def isBrokenVersion5(version: int) -> bool:
+    return version > 1
+
+
 def solve(n: int) -> int:
-    pass
+    left, right = 0, n - 1
 
-"""
+    if left >= right:
+        return 0
+
+    mid = (left + right) // 2
+
+    while left <= right:
+        if isBrokenVersion(mid):
+            right = mid - 1
+        else:
+            left = mid + 1
+
+        mid = (left + right) // 2
+
+    return mid + 1
+
+
+if __name__ == "__main__":
+
+    # Test 1: usually test
+    isBrokenVersion = isBrokenVersion1
+    print(
+        "Test 1: usually test: ",
+        "PASSED" if solve(7) == 5 else "FAILED"
+    )
+
+    # Test 2: all versions -- broken
+    isBrokenVersion = isBrokenVersion2
+    print(
+        "Test 2: all versions -- broken: ",
+        "PASSED" if solve(7) == 1 else "FAILED"
+    )
+
+    # Test 3: only last version broken
+    isBrokenVersion = isBrokenVersion3
+    print(
+        "Test 3: only last version broken: ",
+        "PASSED" if solve(7) == 7 else "FAILED"
+    )
+
+    # Test 4: two last versions -- broken
+    isBrokenVersion = isBrokenVersion4
+    print(
+        "Test 4: two last versions -- broken: ",
+        "PASSED" if solve(7) == 6 else "FAILED"
+    )
+
+    # Test 5: only first version -- correct
+    isBrokenVersion = isBrokenVersion5
+    print(
+        "Test 5: only first version -- correct: ",
+        "PASSED" if solve(7) == 2 else "FAILED"
+    )
+
