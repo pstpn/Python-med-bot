@@ -27,6 +27,11 @@
 -109 <= target <= 109
 ```
 
+## <span style="color:#C0BFEC">🏃🏻‍♂️ ***Запуск*** </span>
+```shell
+python3 test_1.py
+```
+
 ## <span style="color:#C0BFEC">👨🏻‍💻 ***Анализ сложности реализованного алгоритма:*** </span>
 
 ```text
