@@ -15,7 +15,10 @@ def solve(nums: list[int], target: int) -> list[int]:
 if __name__ == "__main__":
 
     # Test 1: one element
-    print("Test 1: one element: ", "PASSED" if solve([1], 1) == [] else "FAILED")
+    print(
+        "Test 1: one element: ",
+        "PASSED" if solve([1], 1) == [] else "FAILED"
+    )
 
     # Test 2: usually test
     print(
@@ -24,7 +27,10 @@ if __name__ == "__main__":
     )
 
     # Test 3: empty list
-    print("Test 3: empty list: ", "PASSED" if solve([], 10) == [] else "FAILED")
+    print(
+        "Test 3: empty list: ",
+        "PASSED" if solve([], 10) == [] else "FAILED"
+    )
 
     # Test 4: zero in elements
     print(
